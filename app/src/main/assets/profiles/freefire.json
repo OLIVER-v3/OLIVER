@@ -1,26 +1,121 @@
 {
   "profile": "freefire",
   "view": {
-    "x": 0.5, "y": 0.0, "w": 0.5, "h": 1.0,
-    "sensX": 1.0, "sensY": 1.0, "invertY": false,
-    "toggleKey": "TAB", "releaseKey": "ALT_LEFT"
+    "x": 0.5,
+    "y": 0.0,
+    "w": 0.5,
+    "h": 1.0,
+    "sensX": 1.0,
+    "sensY": 1.0,
+    "invertY": false,
+    "toggleKey": "TAB",
+    "releaseKey": "ALT_LEFT"
   },
   "buttons": [
-    {"id": "joystick", "x": 0.15, "y": 0.70, "size": 0.14, "label": "WASD",
-     "bindings": [{"input": "W", "function": "JOYSTICK"}]},
-    {"id": "fire", "x": 0.88, "y": 0.55, "size": 0.10, "label": "Fire",
-     "bindings": [{"input": "LMB", "function": "FIRE_LOOK"}]},
-    {"id": "scope", "x": 0.80, "y": 0.38, "size": 0.07, "label": "Scope",
-     "bindings": [{"input": "RMB", "function": "SCOPE"}]},
-    {"id": "jump", "x": 0.93, "y": 0.78, "size": 0.07, "label": "Jump",
-     "bindings": [{"input": "SPACE", "function": "TAP"}]},
-    {"id": "crouch", "x": 0.84, "y": 0.84, "size": 0.06, "label": "Crouch",
-     "bindings": [{"input": "C", "function": "TAP"}]},
-    {"id": "reload", "x": 0.70, "y": 0.86, "size": 0.06, "label": "Reload",
-     "bindings": [{"input": "R", "function": "TAP"}]},
-    {"id": "weapon1", "x": 0.45, "y": 0.92, "size": 0.05, "label": "1",
-     "bindings": [{"input": "1", "function": "TAP"}]},
-    {"id": "weapon2", "x": 0.52, "y": 0.92, "size": 0.05, "label": "2",
-     "bindings": [{"input": "2", "function": "TAP"}]}
+    {
+      "id": "joystick",
+      "x": 0.15,
+      "y": 0.7,
+      "size": 0.14,
+      "label": "WASD",
+      "bindings": [
+        {
+          "input": "W",
+          "function": "JOYSTICK"
+        }
+      ],
+      "type": "JOYSTICK"
+    },
+    {
+      "id": "fire",
+      "x": 0.88,
+      "y": 0.55,
+      "size": 0.1,
+      "label": "Fire",
+      "bindings": [
+        {
+          "input": "LMB",
+          "function": "FIRE_LOOK"
+        }
+      ]
+    },
+    {
+      "id": "scope",
+      "x": 0.8,
+      "y": 0.38,
+      "size": 0.07,
+      "label": "Scope",
+      "bindings": [
+        {
+          "input": "RMB",
+          "function": "SCOPE"
+        }
+      ]
+    },
+    {
+      "id": "jump",
+      "x": 0.93,
+      "y": 0.78,
+      "size": 0.07,
+      "label": "Jump",
+      "bindings": [
+        {
+          "input": "SPACE",
+          "function": "TAP"
+        }
+      ]
+    },
+    {
+      "id": "crouch",
+      "x": 0.84,
+      "y": 0.84,
+      "size": 0.06,
+      "label": "Crouch",
+      "bindings": [
+        {
+          "input": "C",
+          "function": "TAP"
+        }
+      ]
+    },
+    {
+      "id": "reload",
+      "x": 0.7,
+      "y": 0.86,
+      "size": 0.06,
+      "label": "Reload",
+      "bindings": [
+        {
+          "input": "R",
+          "function": "TAP"
+        }
+      ]
+    },
+    {
+      "id": "weapon1",
+      "x": 0.45,
+      "y": 0.92,
+      "size": 0.05,
+      "label": "1",
+      "bindings": [
+        {
+          "input": "1",
+          "function": "TAP"
+        }
+      ]
+    },
+    {
+      "id": "weapon2",
+      "x": 0.52,
+      "y": 0.92,
+      "size": 0.05,
+      "label": "2",
+      "bindings": [
+        {
+          "input": "2",
+          "function": "TAP"
+        }
+      ]
+    }
   ]
 }

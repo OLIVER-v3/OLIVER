@@ -1,5 +1,6 @@
 package com.jerry.oliver.keymap
 
+import com.jerry.oliver.components.ComponentType
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -54,9 +55,11 @@ data class GameButton(
     var size: Float = 0.08f,
     var label: String = "",
     val bindings: MutableList<Binding> = mutableListOf(),
+    var type: ComponentType = ComponentType.TOUCH,
 ) {
     fun toJson() = JSONObject().apply {
         put("id", id)
+        put("type", type.name)
         put("x", x.toDouble())
         put("y", y.toDouble())
         put("size", size.toDouble())
@@ -77,6 +80,8 @@ data class GameButton(
                 size = o.optDouble("size", 0.08).toFloat(),
                 label = o.optString("label", ""),
                 bindings = list,
+                type = runCatching { ComponentType.valueOf(o.optString("type", "TOUCH")) }
+                    .getOrDefault(ComponentType.TOUCH),
             )
         }
     }
@@ -119,7 +124,7 @@ data class ViewSettings(
 
 data class Profile(
     var name: String,
-    val view: ViewSettings = ViewSettings(),
+    var view: ViewSettings = ViewSettings(),
     val buttons: MutableList<GameButton> = mutableListOf(),
 ) {
     fun toJson() = JSONObject().apply {

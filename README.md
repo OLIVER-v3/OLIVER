@@ -2,36 +2,38 @@
 
 # OLIVER
 
-Keyboard & mouse mapper for mobile games (in the style of GG Mouse Pro).
+Keyboard & mouse mapper for mobile games.
 
 ## Status
-- [x] App shell, logo, name **OLIVER**
-- [x] Keymap editor: tap to add a button, bind **any** key / mouse button / wheel, drag to move, long-press to delete
-- [x] 16 key functions (tap, hold, toggle, turbo, macro, camera look, fire-look, scope, ...)
-- [x] Conflict checker, JSON profiles (default: `freefire`)
-- [x] Camera-look maths (`CameraLookHandler`)
-- [ ] Phase 2: activation (Wireless ADB / Shizuku) + touch injection server
-- [ ] Phase 2: overlay + pointer, macro engine
+- [x] Bottom-nav app: **Start Game** (games list, Add Game, mouse/keyboard badges), Account, Settings
+- [x] Start Game: overlay permission -> foreground session -> floating ball, side menu, HUD (battery / time)
+- [x] Edit keymap: Exit · Add component · Save · Share · Import (10 component types)
+- [x] Bind any key / mouse button / wheel, 16 functions, conflict checker, per-game profiles
+- [x] Free Fire preset
+- [x] Server skeleton (`app_process` + InputManager touch injection) and Termux activation script
+- [ ] Wire `InputRouter`: physical key/mouse events -> components -> `IpcClient` -> `TouchInjector`
+- [ ] FPS / ping / net-speed monitors, macro engine, keyboard typing panel, keymap configs
 
 ## Build on GitHub
-Push to `main` — the **Build OLIVER APK** workflow runs and uploads `OLIVER-debug-apk`
-(Actions tab -> latest run -> Artifacts).
+Push to `main`; the **Build OLIVER APK** workflow uploads `OLIVER-debug-apk` (Actions -> run -> Artifacts).
 
-## Build locally
-Android Studio (Hedgehog+) -> open this folder -> Run. Or `gradle assembleDebug` with Gradle 8.9 + JDK 17.
+## Activation (Termux)
+See `scripts/oliver-activate.sh` and the Activation screen (Settings tab).
 
-## Folder layout
+## Layout
 ```
-OLIVER/
-├── .github/workflows/build-apk.yml
-├── app/src/main/
-│   ├── java/com/jerry/oliver/
-│   │   ├── MainActivity.kt
-│   │   ├── editor/   EditorActivity, EditorView, BindingDialog
-│   │   ├── keymap/   KeymapModel, KeyCatalog, ConflictChecker, KeymapStore
-│   │   └── input/    CameraLookHandler
-│   ├── assets/profiles/freefire.json
-│   └── res/          layouts, themes, launcher icons (from logo)
-├── logo.png
-└── build.gradle.kts, settings.gradle.kts, gradle.properties
+app/src/main/java/com/jerry/oliver/
+├── MainActivity.kt
+├── ui/        games, account, settings, status
+├── session/   GameLauncher, SessionService
+├── overlay/   OverlayManager, FloatingBall, RadialMenu, HudBar
+├── editor/    EditorActivity, EditorView, AddComponentDialog, BindingDialog
+├── components/ComponentType
+├── keymap/    model, KeyCatalog, ConflictChecker, KeymapStore, KeymapRepository
+├── input/     CameraLookHandler, DeviceMonitor
+├── server/    Main, TouchInjector, IpcProtocol, IpcClient
+├── activation/ActivationActivity, ServerLauncher
+├── games/     GameRepository, InstalledApps
+├── monitor/   BatteryMonitor
+├── macro/ tools/ util/
 ```

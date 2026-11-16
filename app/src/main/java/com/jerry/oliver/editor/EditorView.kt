@@ -8,21 +8,26 @@ import android.graphics.RectF
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.widget.Toast
+import com.jerry.oliver.components.ComponentType
 import com.jerry.oliver.keymap.GameButton
 import com.jerry.oliver.keymap.Profile
 import kotlin.math.hypot
 
 /**
- * Canvas where game buttons are placed.
- *  - tap empty space  -> add a button
- *  - tap a button     -> edit its key bindings
- *  - drag a button    -> move it
+ * Canvas where components are placed.
+ *  - "Add component" -> pick a type -> tap the screen to place it
+ *  - tap a component  -> edit its key bindings
+ *  - drag a component -> move it
  *  - long-press       -> delete it
  */
 class EditorView(context: Context, var profile: Profile) : View(context) {
 
     var onBindRequest: ((GameButton) -> Unit)? = null
     var onChanged: (() -> Unit)? = null
+
+    /** Type chosen in "Add component"; the next tap on empty space places it. */
+    var pendingType: ComponentType? = null
 
     private val fill = Paint(Paint.ANTI_ALIAS_FLAG).apply { color = Color.argb(120, 255, 26, 0) }
     private val stroke = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -48,12 +53,17 @@ class EditorView(context: Context, var profile: Profile) : View(context) {
             val b = hit(e.x, e.y)
             if (b != null) {
                 onBindRequest?.invoke(b)
+                return true
+            }
+            val type = pendingType
+            if (type == null) {
+                Toast.makeText(context, "Tap “Add component” first", Toast.LENGTH_SHORT).show()
             } else if (width > 0 && height > 0) {
-                val n = profile.buttons.size + 1
-                var id = "btn_$n"
+                var id = "${type.name.lowercase()}_${profile.buttons.size + 1}"
                 while (profile.buttons.any { it.id == id }) id += "x"
-                val nb = GameButton(id, e.x / width, e.y / height)
+                val nb = GameButton(id, e.x / width, e.y / height, size = type.defaultSize, type = type)
                 profile.buttons += nb
+                pendingType = null
                 invalidate(); onChanged?.invoke()
                 onBindRequest?.invoke(nb)
             }
@@ -99,7 +109,7 @@ class EditorView(context: Context, var profile: Profile) : View(context) {
             val rad = radius(b)
             canvas.drawCircle(cx, cy, rad, fill)
             canvas.drawCircle(cx, cy, rad, stroke)
-            val label = b.label.ifEmpty { b.bindings.firstOrNull()?.input ?: b.id }
+            val label = b.label.ifEmpty { b.bindings.firstOrNull()?.input ?: b.type.short.ifEmpty { b.id } }
             canvas.drawText(label.take(8), cx, cy + text.textSize / 3, text)
         }
     }

@@ -77,6 +77,7 @@ object BindingDialog {
         val fnSpinner = Spinner(context).apply {
             adapter = ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item,
                 Fn.values().map { it.label })
+            setSelection(Fn.values().indexOf(button.type.defaultFn))
         }
 
         val layout = LinearLayout(context).apply {

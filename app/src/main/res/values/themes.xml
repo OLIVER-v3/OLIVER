@@ -2,11 +2,11 @@
     <color name="oliver_red">#FF1A00</color>
     <color name="oliver_bg">#0E0E10</color>
     <color name="oliver_surface">#1B1B1F</color>
-    <style name="Theme.Oliver" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Oliver" parent="Theme.MaterialComponents.NoActionBar">
         <item name="colorPrimary">@color/oliver_red</item>
         <item name="colorOnPrimary">#FFFFFF</item>
         <item name="android:windowBackground">@color/oliver_bg</item>
         <item name="android:statusBarColor">@color/oliver_bg</item>
-        <item name="android:navigationBarColor">@color/oliver_bg</item>
+        <item name="android:navigationBarColor">@color/oliver_surface</item>
     </style>
 </resources>
